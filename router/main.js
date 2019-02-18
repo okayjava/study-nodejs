@@ -1,5 +1,6 @@
 require('date-utils');
 
+ 
 module.exports = function(app)
 {
      app.get('/',function(req,res){
@@ -14,6 +15,14 @@ module.exports = function(app)
             var dt = new Date();
 
             j.head.time = dt.toFormat('YYYY-MM-DD HH24:MI:SS');
+            console.log(__dirname);
+            const myModule = require( __dirname +'/../include/module.js');
+            j.head.text = myModule.hello();
+
+            const MyClass = require ( __dirname + '/../include/class.js');
+            const cat = new MyClass();
+            j.head.class = cat.makeSound();
+            
             console.log (j);
             res.render('index.html', j);
 
