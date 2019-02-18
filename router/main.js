@@ -23,6 +23,8 @@ module.exports = function(app)
             const cat = new MyClass();
             j.head.class = cat.makeSound();
             
+            j.head.global = GlobalValue;
+            console.log(GlobalValue);
             console.log (j);
             res.render('index.html', j);
 

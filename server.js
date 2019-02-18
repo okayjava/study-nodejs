@@ -4,6 +4,7 @@ var app = express();
 var bodyParse = require('body-parser');
 var session = require('express-session');
 var fs = require("fs");
+global.GlobalValue = 'globalglobalglobal value';
 
 // 라우터 파일 지정.
 var router = require('./router/main')(app);
