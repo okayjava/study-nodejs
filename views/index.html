@@ -1,10 +1,55 @@
-<html>
+<html ng-app="todoApp">
   <head>
     <title>head.job</title>
     <link rel="stylesheet" type="text/css" href="css/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.7/angular.min.js"></script>
+    <script src="todo.js"></script>
+    <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
   </head>
   <body>
-    Hey, this is index page
+      <ul>
+          <li>
+            <h1>Angular Sample</h1>
+          </li>
+        </ul>
+      <li>
+        <input type="text" ng-model="yourName" placeholder="Enter a name here">
+        <hr>
+        <h1>Hello {{yourName}}!</h1>
+      </li>
+    </ul>
+    <ul>
+      <li>
+        <div ng-controller="TodoListController as todoList">
+          <span>{{todoList.remaining()}} of {{todoList.todos.length}} remaining</span>
+          [ <a href="" ng-click="todoList.archive()">archive</a> ]
+          <ul class="unstyled">
+            <li ng-repeat="todo in todoList.todos">
+              <label class="checkbox">
+                <input type="checkbox" ng-model="todo.done">
+                <span class="done-{{todo.done}}">{{todo.text}}</span>
+              </label>
+            </li>
+            <li ng-repeat="todo in todoList.sample">
+              <label class="checkbox">
+                <input type="checkbox" ng-model="todo.done">
+                <span class="done-{{todo.done}}">{{todo.text}}</span>
+              </label>
+            </li>
+          </ul>
+          <form ng-submit="todoList.addTodo()">
+            <input type="text" ng-model="todoList.todoText"  size="30" placeholder="add new todo here">
+            <input class="btn-primary" type="submit" value="add">
+          </form>
+        </div>
+      </li>
+    </ul>
+    <br><br><br>
+    <ul>
+        <li><hr>
+          <h1>body-parser Sample</h1>
+        </li>
+      </ul>
     <h1>Loop it! | Server Start time : <%=head.date%></h1>
     <h1>Loop it! | Server Start time : <%=head.time%></h1>
     <h1>Loop it! | text : <%=head.text%></h1>
