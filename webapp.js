@@ -5,9 +5,22 @@ const o = require('os');
 const hostname = '127.0.0.1';
 const port = 3001;
 var dt = new Date();
+var cors = require('cors');
+var express = require('express');
+var app = express();
 
+var allowCORS = function(req, res, next) {
+  res.header('Acess-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Methods', 'GET, PUT, POST, DELETE, OPTIONS');
+  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
+  (req.method === 'OPTIONS') ?
+    res.send(200) :
+    next();
+};
 
-const server = http.createServer((req, res) => {
+app.use(cors());
+
+app.get('/', function (req, res, next) {
 
     res.statusCode = 200;
     res.setHeader('Content-Type', 'application/json');
@@ -39,6 +52,8 @@ const server = http.createServer((req, res) => {
     res.end(data);
 });
 
-server.listen(port, hostname, () => {
+app.listen(port, function()  {
   console.log(`Server running at http://${hostname}:${port}/`);
+  console.log('CORS-enabled web server listening on port 80')
+
 });
