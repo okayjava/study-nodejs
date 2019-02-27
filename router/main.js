@@ -9,8 +9,14 @@ module.exports = function(app)
 
         var url = 'http://localhost:3001';  
         request(url, function(error, response, html){  
-        if (error) {throw error};
-            
+            if (error) {
+                throw error;
+                return;
+            };
+            if ( !html) {
+                return;
+            }
+
             j = JSON.parse(html);
             var dt = new Date();
 

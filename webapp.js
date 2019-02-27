@@ -10,18 +10,22 @@ var express = require('express');
 var app = express();
 
 var allowCORS = function(req, res, next) {
-  res.header('Acess-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Methods', 'GET, PUT, POST, DELETE, OPTIONS');
-  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
-  (req.method === 'OPTIONS') ?
-    res.send(200) :
-    next();
+  console.log(req.headers.host);
+  console.log(req.url);
+  console.log(req.method);
+ 
+    res.header('Acess-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET, PUT, POST, DELETE, OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
+    (req.method === 'OPTIONS') ?
+      res.send(200) :
+      next();
+ 
 };
 
-app.use(cors());
+app.use(allowCORS);
 
 app.get('/', function (req, res, next) {
-
     res.statusCode = 200;
     res.setHeader('Content-Type', 'application/json');
     var data = "";
